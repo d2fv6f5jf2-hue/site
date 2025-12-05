@@ -9,25 +9,24 @@ html,body{
 .scroll-container{
   position:fixed;
   inset:0;
-  overflow-y:scroll;
+  overflow-y:auto;                 /* changed from scroll → enables native pull-to-refresh */
   -webkit-overflow-scrolling:touch;
-  /* ↓↓↓ THIS IS THE ONLY LINE THAT MATTERS ↓↓↓ */
-  overscroll-behavior-y:auto;        /* normal pull-to-refresh when pulling down */
+  overscroll-behavior-y:auto;      /* normal pull-to-refresh when pulling down */
+  scroll-snap-type:y mandatory;
 }
 
 .hero{
   width:100%;
-  height:140vh;                      /* extra image for reveal when swiping up */
-  object-fit:cover;
+  height:100vh;                    /* exactly viewport height */
+  object-fit:cover;                /* fixes the "huge/zoomed" issue */
   display:block;
-  transform:translateY(-20vh);       /* centers the image perfectly */
   scroll-snap-align:start;
 }
 
-/* tiny invisible spacer at the top – creates the rubberband zone when swiping up */
+/* Invisible spacer at the top — this creates the rubberband when swiping up */
 .scroll-container::before{
   content:"";
   display:block;
-  height:20vh;
+  height:150px;                    /* how far you can pull when swiping up */
   scroll-snap-align:start;
 }
