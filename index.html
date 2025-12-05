@@ -3,17 +3,36 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
-  <title>Rubberband Top – Perfect</title>
-  <link rel="stylesheet" href="css/style.css">
-  <link rel="preload" as="image" href="assets/hero.webp">
+  <title>Final – Works Everywhere</title>
+  <style>
+    *{margin:0;padding:0}
+    html,body{height:100vh;overflow:hidden;background:#000}
+    .container{
+      position:fixed;
+      inset:0;
+      overflow-y:auto;                  /* normal pull-to-refresh */
+      -webkit-overflow-scrolling:touch;
+    }
+    .container::before{
+      content:"";
+      display:block;
+      height:180px;                     /* rubberband distance when swiping up */
+    }
+    img{
+      width:100%;
+      height:100vh;
+      object-fit:cover;                 /* perfect fit, no zoom */
+      display:block;
+    }
+  </style>
 </head>
 <body>
-  <!-- Tall background image (150vh) -->
-  <div class="bg">
-    <img src="assets/hero.webp" class="bg-image">
+  <div class="container">
+    <!-- tiny invisible spacer at top for rubberband -->
+    <div style="height:180px;"></div>
+    
+    <!-- your actual image -->
+    <img src="assets/hero.webp" alt="Hero">
   </div>
-
-  <!-- Transparent 100vh scroll layer on top – this one handles all rubberbanding -->
-  <div class="scroll-layer"></div>
 </body>
 </html>
